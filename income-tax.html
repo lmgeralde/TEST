@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Income Tax Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #calculator {
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 14px;
+            width: 200px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #1338BE;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #4fa3d1;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        #backToHomepage {
+            color: #333;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #backToHomepage:hover {
+            color: #FED000; /* Change to your desired hover color */
+        }
+    </style>
+    <script>
+        function calculateTax() {
+            const incomeInput = document.getElementById('income');
+            const income = parseFloat(incomeInput.value);
+
+            if (isNaN(income)) {
+                alert('Please enter a valid numeric income.');
+                incomeInput.value = ''; // Clear the input field
+                return;
+            }
+
+            let basicTax = 0;
+            let rate = 0;
+            let incomeTax = 0;
+
+            if (income <= 250000) {
+                basicTax = 0;
+                rate = 0;
+            } else if (income <= 400000) {
+                basicTax = 250000;
+                rate = 0.20;
+            } else if (income <= 800000) {
+                basicTax = 400000;
+                rate = 0.25;
+            } else if (income <= 2000000) {
+                basicTax = 800000;
+                rate = 0.30;
+            } else if (income <= 8000000) {
+                basicTax = 2000000;
+                rate = 0.32;
+            } else {
+                basicTax = 8000000;
+                rate = 0.35;
+            }
+
+            incomeTax = basicTax + (income - basicTax) * rate;
+
+            document.getElementById('result').innerText = `Income Tax: ${incomeTax.toFixed(2)}`;
+        }
+
+        function backToHomepage() {
+        }
+    </script>
+</head>
+
+<body>
+    <div id="calculator">
+        <h2>Income Tax Calculator</h2>
+        <label for="income">Enter Taxable Income:</label>
+        <input type="number" id="income" name="income">
+        <button onclick="calculateTax()">Calculate Tax</button>
+        <p id="result"></p>
+    </div>
+
+    <a href="homepage.html" id="backToHomepage" onclick="backToHomepage()">Back to Homepage</a>
+
+</body>
+
+</html>
